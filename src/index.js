@@ -42,6 +42,9 @@ app.use("/userService", createProxyMiddleware({
   target: "http://localhost:3002/userService",
   changeOrigin: true
 }));
+app.get('/', (req, res) => {
+  res.send("Hello world")
+})
 const PORT = 3010;
 app.listen(PORT, () => {
   console.log(`API Gateway listening on port ${PORT}...`);
