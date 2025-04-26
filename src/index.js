@@ -9,6 +9,9 @@ const { clerkMiddleware } = require('@clerk/express')
 const axios = require('axios')
 const app = express();
 
+const crypto = require('crypto');
+global.crypto = crypto;
+
 app.use(
   clerkMiddleware({
     publishableKey: process.env.CLERK_PUBLISHABLE_KEY,

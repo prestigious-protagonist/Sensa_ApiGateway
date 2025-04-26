@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const {auth} = require("@clerk/express")
 const { getAuth } = require("@clerk/express");
 const JWKS_URL = 'https://coherent-shiner-22.clerk.accounts.dev/.well-known/jwks.json';
