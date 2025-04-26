@@ -31,6 +31,7 @@ async function isAuthenticated(req, res, next) {
     });
 
     // Assuming Clerk includes the email in the payload
+    console.log(payload )
     const userEmail = payload.email || payload.emailAddresses?.[0]?.emailAddress;
     
     if (userEmail) {
