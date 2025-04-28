@@ -3,14 +3,20 @@ const express = require("express");
 const morgan = require("morgan");
 const { createProxyMiddleware } = require("http-proxy-middleware");
 const cors = require("cors");
-const rateLimiter = require("express-rate-limit") 
+const rateLimiter = require("express-rate-limit")
 const isAuthenticated  = require("./middleware/index")
 const { clerkMiddleware } = require('@clerk/express')
 const axios = require('axios')
 const app = express();
+const https = require('https');
+const fs = require('fs');
 
-  const crypto = require('crypto');
-  global.crypto = crypto;
+const crypto = require('crypto');
+global.crypto = crypto;
+
+// const privateKey = fs.readFileSync('/etc/ssl/private/selfsigned.key', 'utf8');
+// const certificate = fs.readFileSync('/etc/ssl/certs/selfsigned.crt', 'utf8');
+// const credentials = { key: privateKey, cert: certificate };
 
 app.use(
   clerkMiddleware({
@@ -30,8 +36,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'x-email'],
   credentials: true // if you are using cookies or auth headers
 }));
-
-app.use('/', isAuthenticated);
+app.use('/userService', isAuthenticated);
 app.use("/authService", createProxyMiddleware({
   target: "http://3.109.212.89:3001/authService",
   changeOrigin: true
@@ -44,12 +49,16 @@ app.use("/userService", createProxyMiddleware({
 app.get('/', (req, res) => {
   console.log(req.headers)
   res.status(200).json({
-    data: "Hello wprld",
+    data: "You are hitting the API Gateway.",
     response: req.auth,
     more: req.auth.user
   })
 })
+const httpsServer = https.createServer(credentials, app);
 const PORT = 3010;
+// httpsServer.listen(PORT, () => {
+//   console.log('API Gateway');
+// });
 app.listen(PORT, () => {
   console.log(`API Gateway listening on port ${PORT}...`);
 });
