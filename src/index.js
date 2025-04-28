@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     more: req.auth.user
   })
 })
-const httpsServer = https.createServer(credentials, app);
+//const httpsServer = https.createServer(credentials, app);
 const PORT = 3010;
 // httpsServer.listen(PORT, () => {
 //   console.log('API Gateway');
