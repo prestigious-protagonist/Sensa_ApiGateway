@@ -24,15 +24,21 @@ app.use(morgan('combined'))
 //   windowMs: 2*60*1000,
 //   max: 5
 // }))
-app.use(cors({origin: "*"}))
+app.use(cors({
+  origin: ['https://sensa.vercel.app', 'http://localhost:3000'],  // frontend URL
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-email'],
+  credentials: true // if you are using cookies or auth headers
+}));
+
 app.use('/', isAuthenticated);
 app.use("/authService", createProxyMiddleware({
-  target: "http://localhost:3001/authService",
+  target: "http://3.109.212.89:3001/authService",
   changeOrigin: true
 }));
 
 app.use("/userService", createProxyMiddleware({
-  target: "http://localhost:3002/userService",
+  target: "http://3.109.212.89:3002/userService",
   changeOrigin: true
 }));
 app.get('/', (req, res) => {
