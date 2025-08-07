@@ -46,6 +46,10 @@ app.use("/userService", createProxyMiddleware({
   target: "http://43.204.116.75:3002/userService",
   changeOrigin: true
 }));
+app.use("/chatService", createProxyMiddleware({
+  target: "http://43.204.116.75:3005/chatService",
+  changeOrigin: true
+}));
 app.get('/', (req, res) => {
   console.log(req.headers)
   res.status(200).json({
