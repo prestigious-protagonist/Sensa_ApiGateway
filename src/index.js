@@ -50,6 +50,10 @@ app.use("/chatService", createProxyMiddleware({
   target: "http://43.204.116.75:3005/chatService",
   changeOrigin: true
 }));
+app.use("/notificationService", createProxyMiddleware({
+  target: "http://43.204.116.75:3007/notificationService",
+  changeOrigin: true
+}));
 app.get('/', (req, res) => {
   console.log(req.headers)
   res.status(200).json({
