@@ -31,7 +31,7 @@ app.use(morgan('combined'))
 //   max: 5
 // }))
 app.use(cors({
-  origin: ['https://sensa.vercel.app', 'http://localhost:3000'],  // frontend URL
+  origin: ['https://sensa-frontend.vercel.app', 'http://localhost:3000'],  // frontend URL
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization', 'x-email'],
   credentials: true // if you are using cookies or auth headers
