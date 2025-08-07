@@ -38,12 +38,12 @@ app.use(cors({
 }));
 app.use('/userService', isAuthenticated);
 app.use("/authService", createProxyMiddleware({
-  target: "http://3.110.117.104:3001/authService",
+  target: "http://43.204.116.75:3001/authService",
   changeOrigin: true
 }));
 
 app.use("/userService", createProxyMiddleware({
-  target: "http://3.110.117.104:3002/userService",
+  target: "http://43.204.116.75:3002/userService",
   changeOrigin: true
 }));
 app.get('/', (req, res) => {
